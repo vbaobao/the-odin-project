@@ -45,7 +45,7 @@ header div a, footer div a {
   margin-top: 150px;
 }
 
-#icon {
+.icon {
   width: 20px;
   vertical-align: middle;
 }

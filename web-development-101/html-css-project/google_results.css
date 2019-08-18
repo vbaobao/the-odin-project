@@ -1,0 +1,58 @@
+body {
+  font: 0.8em "Arial";
+  color: #5b6368;
+  text-decoration: none;
+}
+
+#searchform {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+#logo {
+  width: 92px;
+  height: 30px;
+}
+
+input {
+  border: 1px solid #dde7ed;
+  border-radius: 20px;
+  height: 30px;
+  width: 50%;
+}
+
+.icon {
+  width: 20px;
+  vertical-align: middle;
+}
+
+#topnav {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 30%;
+  margin-left: 10%;
+}
+
+#topnav img {
+  height: 15px;
+}
+
+#topnav a {
+  font: 1em "Arial";
+  color: #5b6368;
+  text-decoration: none;
+  padding: 5px;
+}
+
+#topnav a:hover {
+  color: blue;
+}
+
+#results {
+
+}
+
+#knowledgecard {
+
+}

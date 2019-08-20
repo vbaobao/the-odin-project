@@ -19,7 +19,7 @@ input {
   border: 1px solid #dde7ed;
   border-radius: 20px;
   height: 30px;
-  width: 50%;
+  width: 300px;
 }
 
 .icon {
@@ -43,6 +43,7 @@ input {
   color: #5b6368;
   text-decoration: none;
   padding: 5px;
+  margin: 20px 0;
 }
 
 #topnav a:hover {
@@ -50,6 +51,44 @@ input {
 }
 
 #results {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 30%;
+  margin-left: 10%;
+  padding: 10px;
+}
+
+.result_content {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  border: 2px solid red;
+}
+
+.title {
+  font-size: 1.25em;
+}
+
+.resultslinks {
+  color: green;
+}
+
+.toplinks {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100px;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.blurb {
+
+}
+
+.toplinkblurb {
 
 }
 

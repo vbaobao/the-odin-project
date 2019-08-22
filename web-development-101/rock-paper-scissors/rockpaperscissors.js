@@ -4,7 +4,7 @@ function computerPlay() {
     return compChoice[randInt];
 }
 
-function printScore(round, playerScore, computerScore) {
+function showScore(round, playerScore, computerScore) {
     console.log("R O U N D _ " + round);
     console.log("------------------------\n------------------------");
     console.log("Player Score: " + playerScore);
@@ -21,7 +21,7 @@ function endScore(playerScore, computerScore) {
     }
 }
 
-function printEndGame (playerScore, computerScore) {
+function showEndGame (playerScore, computerScore) {
     console.log("------------------------\n------------------------");
     console.log("The game is now over!");
     console.log("------------------------\n------------------------");
@@ -37,30 +37,18 @@ function printEndGame (playerScore, computerScore) {
 }
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection.toLowerCase() == "rock") {
-        if (computerSelection == "rock") {
-            return "tie";
-        } else if (computerSelection == "paper") {
-            return "lose";
-        } else if (computerSelection == "scissors") {
-            return "win";
-        }
-    } else if (playerSelection.toLowerCase() == "paper") {
-        if (computerSelection == "rock") {
-            return "win";
-        } else if (computerSelection == "paper") {
-            return "tie";
-        } else if (computerSelection == "scissors") {
-            return "lose";
-        }
-    } else if (playerSelection.toLowerCase() == "scissors") {
-        if (computerSelection == "rock") {
-            return "lose";
-        } else if (computerSelection == "paper") {
-            return "win";
-        } else if (computerSelection == "scissors") {
-            return "tie";
-        }
+    if (playerSelection == computerSelection) {
+        return "tie";
+    } else if (
+            (playerSelection == "paper" && computerSelection == "rock") ||
+            (playerSelection == "rock" && computerSelection == "scissors") ||
+            (playerSelection == "scissors" && computerSelection == "paper")) {
+        return "win";
+    } else if (
+            (playerSelection == "paper" && computerSelection == "scissors") ||
+            (playerSelection == "rock" && computerSelection == "paper") ||
+            (playerSelection == "scissors" && computerSelection == "rock")) {
+        return "lose";
     }
 }
 
@@ -72,7 +60,7 @@ function game () {
     let roundResult;
 
     //This is the start of the game loop, runs for 5 rounds.
-    for (round; round > gameLen + 1 ; ++) {
+    for (round; round < gameLen + 1 ; round++) {
         console.log("Round " + round);
 
         //Choose rock, paper, or scissors.
@@ -100,9 +88,8 @@ function game () {
             console.log("It's a tie this round!");
         }
 
-        printScore(round, playerScore, computerScore);
+        showScore(round, playerScore, computerScore);
     }
     //After all rounds run, the end of game prints results.
-    printEndGame()
-
+    showEndGame(playerScore, computerScore)
 }

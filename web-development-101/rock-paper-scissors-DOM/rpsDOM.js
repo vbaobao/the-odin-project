@@ -52,7 +52,14 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game () {
+const button = document.querySelector('button');
+buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        alert("click");
+    });
+});
+
+/* function game () {
     let playerScore = 0;
     let computerScore = 0;
     let round = 1;
@@ -92,4 +99,4 @@ function game () {
     }
     //After all rounds run, the end of game prints results.
     showEndGame(playerScore, computerScore)
-}
+} */

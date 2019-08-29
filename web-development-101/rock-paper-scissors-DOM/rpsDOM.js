@@ -52,11 +52,18 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const button = document.querySelector('button');
-buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        alert("click");
-    });
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
+rock.addEventListener("click", (e) => {
+    alert("rock");
+});
+paper.addEventListener("click", (e) => {
+    alert("paper");
+});
+scissors.addEventListener("click", (e) => {
+    alert("scissors");
 });
 
 /* function game () {

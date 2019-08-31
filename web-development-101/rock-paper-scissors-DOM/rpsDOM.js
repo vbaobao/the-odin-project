@@ -39,6 +39,7 @@ function countScore(div, roundResult, players) {
 
 function checkGameEnd(div, numRounds, playerScore, computerScore) {
     if (playerScore >= 5 || computerScore >= 5) {
+        gameButtons.style.display = "none";
         return showEndGame (div, numRounds, playerScore, computerScore);
     }
 }
@@ -57,17 +58,16 @@ function showEndGame (div, numRounds, playerScore, computerScore) {
     }
 }
 
-function resetGame () {
-    pass;
-}
 
 // DOM
+const gameButtons = document.querySelector("#gameButtons");
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
 const score = document.querySelector("#score");
 const update = document.querySelector("#update");
 const running = document.querySelector("#running");
+const resetBtn = document.querySelector("#reset");
 
 // Required variables
 let player = {score: 0};
@@ -106,4 +106,14 @@ scissors.addEventListener("click", (e) => {
     showScore(score, players[0].score, players[1].score);
     numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
     
+});
+
+resetBtn.addEventListener("click", (e) => {
+    numRounds = 0;
+    players[0].score = 0;
+    players[1].score = 0;
+    running.textContent = "ROUND: 0";
+    score.textContent = "";
+    update.textContent = "";
+    gameButtons.style.display = "block";
 });

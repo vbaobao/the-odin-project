@@ -1,0 +1,22 @@
+body {
+    font: 0.75em "arial";
+  }
+  
+  div {
+    border: 2px solid red;
+  }
+  
+  #gameButtons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+    border: 0px;
+    border-radius: 5px;
+    background: gray;
+    color: white;
+    width: 75px;
+    height: 30px;
+    margin: 10px;
+  }

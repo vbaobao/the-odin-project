@@ -41,6 +41,10 @@ function checkGameEnd(div, numRounds, playerScore, computerScore) {
     if (playerScore >= 5 || computerScore >= 5) {
         gameButtons.style.display = "none";
         return showEndGame (div, numRounds, playerScore, computerScore);
+    } else {
+        numRounds++;
+        div.textContent = "ROUND: " + numRounds;
+        return numRounds;
     }
 }
 
@@ -50,10 +54,6 @@ function showEndGame (div, numRounds, playerScore, computerScore) {
         return numRounds;
     } else if (computerScore >= 5) {
         div.textContent = "You lost the game by " + (computerScore - playerScore) + " points.\nBetter luck next time.";
-        return numRounds;
-    } else {
-        numRounds++;
-        div.textContent = "ROUND: " + numRounds;
         return numRounds;
     }
 }

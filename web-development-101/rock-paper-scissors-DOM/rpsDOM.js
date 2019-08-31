@@ -1,10 +1,12 @@
 function computerPlay() {
+    // Computer randomly chooses either rock, paper, or scissors.
     let compChoice = ["rock", "paper", "scissors"];
     let randInt = Math.floor(Math.random() * 2);
     return compChoice[randInt];
 }
 
 function playRound(playerSelection, computerSelection) {
+    // Plays a round of the game.
     if (playerSelection == computerSelection) {
         return "tie";
     } else if (
@@ -21,10 +23,12 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function showScore(div, playerScore, computerScore) {
+    // Shows the current score.
     div.textContent = "Player Score: " + playerScore + "\nComputer Score: " + computerScore;
 }
 
 function countScore(div, roundResult, players) {
+    // Assigns points for the winner of the rounds.
     if (roundResult == "win") {
         div.textContent = "Player wins this round!";
         return players[0].score += 1;
@@ -38,6 +42,9 @@ function countScore(div, roundResult, players) {
 }
 
 function checkGameEnd(div, numRounds, playerScore, computerScore) {
+    // Checks if a player has won 5 rounds
+    // If not, then counter of the rounds increases by 1
+    // If game is over game buttons are hidden and end game text shows. 
     if (playerScore >= 5 || computerScore >= 5) {
         gameButtons.style.display = "none";
         return showEndGame (div, numRounds, playerScore, computerScore);
@@ -49,6 +56,7 @@ function checkGameEnd(div, numRounds, playerScore, computerScore) {
 }
 
 function showEndGame (div, numRounds, playerScore, computerScore) {
+    // Shows end game text.
     if (playerScore >= 5) {
         div.textContent = "Congratulations! You have won by " + (playerScore - computerScore) + " points!";
         return numRounds;
@@ -61,53 +69,38 @@ function showEndGame (div, numRounds, playerScore, computerScore) {
 
 // DOM
 const gameButtons = document.querySelector("#gameButtons");
-const rock = document.querySelector('#rock');
-const paper = document.querySelector('#paper');
-const scissors = document.querySelector('#scissors');
+const game = document.querySelectorAll("#gameButtons button");
 const score = document.querySelector("#score");
 const update = document.querySelector("#update");
 const running = document.querySelector("#running");
 const resetBtn = document.querySelector("#reset");
 
-// Required variables
+// Game variables
 let player = {score: 0};
 let computer = {score: 0};
 let players = [player, computer];
 let numRounds = 0;
 let roundResult;
+let playerSelection;
 
-// Need to refactor due to DRY
-rock.addEventListener("click", (e) => {
-    let computerSelection = computerPlay();
-    let playerSelection = "rock";
-    roundResult = playRound(playerSelection, computerSelection);
+// Click listeners to play a round of the game.
+for (let i = 0 ; i < game.length ; i++ ) {
+    game[i].addEventListener("click", (e) => {
+        if (i == 0) { playerSelection = "rock"; }
+        else if (i == 1) { playerSelection = "paper"; }
+        else if (i == 2) { playerSelection = "scissors"; }
 
-    countScore(update, roundResult, players);
-    showScore(score, players[0].score, players[1].score);
-    numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
+        let computerSelection = computerPlay();
+        roundResult = playRound(playerSelection, computerSelection);
     
-});
-paper.addEventListener("click", (e) => {
-    let computerSelection = computerPlay();
-    let playerSelection = "paper";
-    roundResult = playRound(playerSelection, computerSelection);
+        countScore(update, roundResult, players);
+        showScore(score, players[0].score, players[1].score);
+        numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
+       
+    });
+}
 
-    countScore(update, roundResult, players);
-    showScore(score, players[0].score, players[1].score);
-    numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
-
-});
-scissors.addEventListener("click", (e) => {
-    let computerSelection = computerPlay();
-    let playerSelection = "scissors";
-    roundResult = playRound(playerSelection, computerSelection);
-
-    countScore(update, roundResult, players);
-    showScore(score, players[0].score, players[1].score);
-    numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
-    
-});
-
+// Resets game to initial values and unhides game buttons.
 resetBtn.addEventListener("click", (e) => {
     numRounds = 0;
     players[0].score = 0;

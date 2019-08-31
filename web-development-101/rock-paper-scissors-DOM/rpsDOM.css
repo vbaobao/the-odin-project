@@ -2,9 +2,21 @@ body {
     font: 0.75em "arial";
     text-align: center;
   }
+
+  div {
+    margin: 10px;
+  }
+
+  .container {
+    background: #f3ece2;
+    border-radius: 20px;
+    margin: 15% 5%;
+    padding: 25px;
+    filter: drop-shadow(2px 2px 3px #695b51);
+  }
   
   #gameboard {
-    background: yellow;
+    background: #fcd134;
     border-radius: 10px;
     width: 50%;
     margin: auto;
@@ -14,7 +26,7 @@ body {
   button {
     border: 0px;
     border-radius: 5px;
-    background: gray;
+    background: #00aec2;
     color: white;
     width: 75px;
     height: 30px;
@@ -25,7 +37,7 @@ body {
   button:hover {
       background: white;
       color: black;
-      border: 1px solid gray;
+      border: 1px solid #695b51;
   }
 
   #running {

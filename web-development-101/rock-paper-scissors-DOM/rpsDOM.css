@@ -3,8 +3,12 @@ body {
     text-align: center;
   }
   
-  div {
-    border: 2px solid red;
+  #gameboard {
+    background: yellow;
+    border-radius: 10px;
+    width: 50%;
+    margin: auto;
+    padding: 15px;
   }
   
   button {

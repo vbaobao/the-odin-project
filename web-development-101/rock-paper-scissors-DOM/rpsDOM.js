@@ -4,38 +4,6 @@ function computerPlay() {
     return compChoice[randInt];
 }
 
-function showScore(round, playerScore, computerScore) {
-    console.log("R O U N D _ " + round);
-    console.log("------------------------\n------------------------");
-    console.log("Player Score: " + playerScore);
-    console.log("Computer Score: " + computerScore);
-}
-
-function endScore(playerScore, computerScore) {
-    if (playerScore == computerScore) {
-        return "tie";
-    } else if (playerScore > computerScore) {
-        return "win";
-    } else if (playerScore < computerScore) {
-        return "lose";
-    }
-}
-
-function showEndGame (playerScore, computerScore) {
-    console.log("------------------------\n------------------------");
-    console.log("The game is now over!");
-    console.log("------------------------\n------------------------");
-    let results = endScore(playerScore, computerScore);
-    if (results == "win") {
-        console.log("Congratulations! You have won by " + (playerScore - computerScore) + " points!");
-    } else if (results == "lose") {
-        console.log("You lost the game by " + (computerScore - playerScore) + " points.");
-        console.log("Better luck next time.");
-    } else if (results == "tie") {
-        console.log("It's a tie! You both have " + playerScore + " points!");
-    }
-}
-
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
         return "tie";
@@ -52,58 +20,91 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function showScore(div, playerScore, computerScore) {
+    div.textContent = "Player Score: " + playerScore + "\nComputer Score: " + computerScore;
+}
+
+function countScore(div, roundResult, players) {
+    if (roundResult == "win") {
+        div.textContent = "Player wins this round!";
+        return players[0].score += 1;
+    } else if (roundResult == "lose") {
+        div.textContent = "Computer wins this round!";
+        return players[1].score += 1;
+    } else if (roundResult == "tie") {
+        div.textContent = "It's a tie!";
+        return;
+    }
+}
+
+function endScore(playerScore, computerScore) {
+    if (playerScore == computerScore) {
+        return "tie";
+    } else if (playerScore > computerScore) {
+        return "win";
+    } else if (playerScore < computerScore) {
+        return "lose";
+    }
+}
+
+function showEndGame (playerScore, computerScore) {
+    console.log("------------------------\n");
+    console.log("The game is now over!");
+    console.log("------------------------\n");
+    let results = endScore(playerScore, computerScore);
+    if (results == "win") {
+        console.log("Congratulations! You have won by " + (playerScore - computerScore) + " points!");
+    } else if (results == "lose") {
+        console.log("You lost the game by " + (computerScore - playerScore) + " points.");
+        console.log("Better luck next time.");
+    } else if (results == "tie") {
+        console.log("It's a tie! You both have " + playerScore + " points!");
+    }
+}
+
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
+const score = document.querySelector("#score");
+const update = document.querySelector("#update");
+const numRounds = document.querySelector("#numRounds");
+
+let player = {score: 0};
+let computer = {score: 0};
+let players = [player, computer];
+let rounds = 0;
+let roundResult;
 
 rock.addEventListener("click", (e) => {
-    alert("rock");
+    let computerSelection = computerPlay();
+    let playerSelection = "rock";
+    roundResult = playRound(playerSelection, computerSelection);
+
+    countScore(update, roundResult, players);
+    showScore(score, players[0].score, players[1].score);
+    rounds++;
+    numRounds.textContent = rounds;
+    
 });
 paper.addEventListener("click", (e) => {
-    alert("paper");
+    let computerSelection = computerPlay();
+    let playerSelection = "paper";
+    roundResult = playRound(playerSelection, computerSelection);
+
+    countScore(update, roundResult, players);
+    showScore(score, players[0].score, players[1].score);
+    rounds++;
+    numRounds.textContent = rounds;
+
 });
 scissors.addEventListener("click", (e) => {
-    alert("scissors");
+    let computerSelection = computerPlay();
+    let playerSelection = "scissors";
+    roundResult = playRound(playerSelection, computerSelection);
+
+    countScore(update, roundResult, players);
+    showScore(score, players[0].score, players[1].score);
+    rounds++;
+    numRounds.textContent = rounds;
+    
 });
-
-/* function game () {
-    let playerScore = 0;
-    let computerScore = 0;
-    let round = 1;
-    let gameLen = 5;
-    let roundResult;
-
-    //This is the start of the game loop, runs for 5 rounds.
-    for (round; round < gameLen + 1 ; round++) {
-        console.log("Round " + round);
-
-        //Choose rock, paper, or scissors.
-        let computerSelection = computerPlay();
-        let playerSelection = prompt("Rock, Paper, or Scissors?");
-        playerSelection = playerSelection.toLowerCase();
-        
-        //Checking if user entered correct data.
-        while (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors") {
-            playerSelection = prompt("Your entry was not 'rock', 'paper' or 'scissors'. Please try again.");
-            playerSelection = playerSelection.toLowerCase();
-        }
-
-        console.log("You chose: " + playerSelection);
-        console.log("Computer chose: " + computerSelection);
-        roundResult = playRound(playerSelection, computerSelection);
-        
-        if (roundResult == "win") {
-            playerScore += 1;
-            console.log("You win this round!");
-        } else if (roundResult == "lose") {
-            computerScore += 1;
-            console.log("You lost this round.");
-        } else if (roundResult == "tie") {
-            console.log("It's a tie this round!");
-        }
-
-        showScore(round, playerScore, computerScore);
-    }
-    //After all rounds run, the end of game prints results.
-    showEndGame(playerScore, computerScore)
-} */

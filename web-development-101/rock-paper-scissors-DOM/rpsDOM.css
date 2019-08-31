@@ -1,14 +1,10 @@
 body {
     font: 0.75em "arial";
+    text-align: center;
   }
   
   div {
     border: 2px solid red;
-  }
-  
-  #gameButtons {
-    display: flex;
-    justify-content: center;
   }
   
   button {
@@ -19,4 +15,11 @@ body {
     width: 75px;
     height: 30px;
     margin: 10px;
+    transition-duration: 0.5s
+  }
+
+  button:hover {
+      background: white;
+      color: black;
+      border: 1px solid gray;
   }

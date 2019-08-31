@@ -37,44 +37,46 @@ function countScore(div, roundResult, players) {
     }
 }
 
-function endScore(playerScore, computerScore) {
-    if (playerScore == computerScore) {
-        return "tie";
-    } else if (playerScore > computerScore) {
-        return "win";
-    } else if (playerScore < computerScore) {
-        return "lose";
+function checkGameEnd(div, numRounds, playerScore, computerScore) {
+    if (playerScore >= 5 || computerScore >= 5) {
+        return showEndGame (div, numRounds, playerScore, computerScore);
     }
 }
 
-function showEndGame (playerScore, computerScore) {
-    console.log("------------------------\n");
-    console.log("The game is now over!");
-    console.log("------------------------\n");
-    let results = endScore(playerScore, computerScore);
-    if (results == "win") {
-        console.log("Congratulations! You have won by " + (playerScore - computerScore) + " points!");
-    } else if (results == "lose") {
-        console.log("You lost the game by " + (computerScore - playerScore) + " points.");
-        console.log("Better luck next time.");
-    } else if (results == "tie") {
-        console.log("It's a tie! You both have " + playerScore + " points!");
+function showEndGame (div, numRounds, playerScore, computerScore) {
+    if (playerScore >= 5) {
+        div.textContent = "Congratulations! You have won by " + (playerScore - computerScore) + " points!";
+        return numRounds;
+    } else if (computerScore >= 5) {
+        div.textContent = "You lost the game by " + (computerScore - playerScore) + " points.\nBetter luck next time.";
+        return numRounds;
+    } else {
+        numRounds++;
+        div.textContent = "ROUND: " + numRounds;
+        return numRounds;
     }
 }
 
+function resetGame () {
+    pass;
+}
+
+// DOM
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
 const score = document.querySelector("#score");
 const update = document.querySelector("#update");
-const numRounds = document.querySelector("#numRounds");
+const running = document.querySelector("#running");
 
+// Required variables
 let player = {score: 0};
 let computer = {score: 0};
 let players = [player, computer];
-let rounds = 0;
+let numRounds = 0;
 let roundResult;
 
+// Need to refactor due to DRY
 rock.addEventListener("click", (e) => {
     let computerSelection = computerPlay();
     let playerSelection = "rock";
@@ -82,8 +84,7 @@ rock.addEventListener("click", (e) => {
 
     countScore(update, roundResult, players);
     showScore(score, players[0].score, players[1].score);
-    rounds++;
-    numRounds.textContent = rounds;
+    numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
     
 });
 paper.addEventListener("click", (e) => {
@@ -93,8 +94,7 @@ paper.addEventListener("click", (e) => {
 
     countScore(update, roundResult, players);
     showScore(score, players[0].score, players[1].score);
-    rounds++;
-    numRounds.textContent = rounds;
+    numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
 
 });
 scissors.addEventListener("click", (e) => {
@@ -104,7 +104,6 @@ scissors.addEventListener("click", (e) => {
 
     countScore(update, roundResult, players);
     showScore(score, players[0].score, players[1].score);
-    rounds++;
-    numRounds.textContent = rounds;
+    numRounds = checkGameEnd(running, numRounds, players[0].score, players[1].score);
     
 });

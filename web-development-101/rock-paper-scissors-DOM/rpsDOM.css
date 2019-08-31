@@ -27,3 +27,11 @@ body {
       color: black;
       border: 1px solid gray;
   }
+
+  #running {
+    font: 1.5em "arial";
+  }
+  
+  span {
+    font-weight: bold;
+  }

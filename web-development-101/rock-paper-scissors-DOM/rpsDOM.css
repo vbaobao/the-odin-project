@@ -3,6 +3,10 @@ body {
     text-align: center;
   }
 
+h1 {
+    margin-bottom: 35px;
+}
+
   div {
     margin: 10px;
   }

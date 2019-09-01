@@ -8,7 +8,7 @@ container.style.cssText = "display: inline-grid; grid-template-columns: repeat("
 
 const body = document.querySelector("body");
 const reset = document.createElement("button");
-body.style.cssText = "display: flex; flex-direction: column"
+body.style.cssText = "display: flex; flex-direction: column; align-items: center"
 reset.textContent = "RESET";
 reset.style.cssText = "background: #b4e6f5; border: 0; border-radius: 5px; margin: 25px auto";
 body.insertBefore(reset, body.childNodes[0]);

@@ -30,11 +30,18 @@ function operate(operator, num1, num2) {
         result = divide(num1,num2);
     }
     else {
-        console.log("error");
+        display.textContent = "Calcualtor error";
     }
 }
 
-function reset() {}
+function reset() {
+    //Clear constants: build, text, operator
+    //Clear html: display
+    build = [];
+    text = "";
+    operator = "";
+    display.textContent = "";
+}
 
 function update(display, text) {
     display.textContent = display.textContent + " " + text;
@@ -48,7 +55,7 @@ let clear = document.querySelector("#clear");
 let display = document.querySelector("#display");
 
 // VARIABLES
-let operator;
+let operator = "";
 let build = [];
 let text = "";
 
@@ -150,12 +157,11 @@ equal.addEventListener("click", (e) => {
             }
         }
     }
+    display.textContent = "";
     console.log(array);
     update(display, array[0]);
 });
 
 clear.addEventListener("click", (e) => {
-    text = "";
-    display.textContent = "";
-    update(display, text);
+    reset();
 });

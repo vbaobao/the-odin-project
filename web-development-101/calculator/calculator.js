@@ -29,9 +29,9 @@ function operate(operator, num1, num2) {
     else if (operator == "divide") {
         result = divide(num1,num2);
     }
-    else (
+    else {
         console.log("error");
-    )
+    }
 }
 
 function reset() {}

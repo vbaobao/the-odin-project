@@ -90,7 +90,6 @@ for (let i = 0 ; i < nums.length ; i++ ) {
     nums[i].addEventListener("click", (e) => {
         build.push(i);
     });
-
     update(display, text);
 }
 
@@ -125,9 +124,9 @@ equal.addEventListener("click", (e) => {
         }
     }
     
-    //Checks for order of operation MDAS, left->right.
-    //Insert result of operation into the array.
-    //Remove elements of the array after it is calculated.
+    //Checks for order of operation MDAS, left->right
+    //Insert result of operation into the array
+    //Remove elements of the array after it is calculated
     while (array.length > 1) {
         for (let i = 0; i < array.length; i++) {
             //multiply
@@ -138,7 +137,7 @@ equal.addEventListener("click", (e) => {
             }
         }
         for (let i = 0; i < array.length; i++) {
-            //divide
+            //divide + divide by 0 check
             if (array[i] == "divide") {
                 if ( array[i+1] == 0 ) {
                     display.textContent = "Divide by 0 Error";
@@ -171,6 +170,7 @@ equal.addEventListener("click", (e) => {
     update(display, array[0]);
 });
 
+//Click listener for clearing the display and calculations
 clear.addEventListener("click", (e) => {
     reset();
 });

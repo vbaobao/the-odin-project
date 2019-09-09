@@ -35,8 +35,8 @@ function operate(operator, num1, num2) {
 }
 
 function reset() {
-    //Clear constants: build, text, operator
-    //Clear html: display
+    //Clear variables: build, text, operator
+    //Clear HTML: display
     build = [];
     text = "";
     operator = "";
@@ -44,6 +44,7 @@ function reset() {
 }
 
 function update(display, text) {
+    //Displays text updates as buttons are pressed
     display.textContent = display.textContent + " " + text;
 }
 
@@ -60,6 +61,7 @@ let build = [];
 let text = "";
 
 // EVENT LISTENERS
+//Click listener for operators
 for (let i = 0 ; i < operators.length ; i++ ) {
     operators[i].addEventListener("click", (e) => {
         if (i == 0) { 
@@ -83,6 +85,7 @@ for (let i = 0 ; i < operators.length ; i++ ) {
     update(display, text);
 }
 
+//Click listeners for numbers
 for (let i = 0 ; i < nums.length ; i++ ) {
     nums[i].addEventListener("click", (e) => {
         build.push(i);
@@ -91,6 +94,7 @@ for (let i = 0 ; i < nums.length ; i++ ) {
     update(display, text);
 }
 
+//Clcik listener for "=" sign
 equal.addEventListener("click", (e) => {
     //EVERYTHING HAPPENS HERE, AFTER EQUAL IS CLICKED
     //Checks if entry is valid. In number/string alternations
@@ -101,6 +105,7 @@ equal.addEventListener("click", (e) => {
     let array = build;
 
     //Check if entries are valid
+    //["add", 2, 3] should be invalid
     for (let i = 0; i < array.length; i++) {
         if ( i == 0 || i%2 == 0 ) {
             if ( typeof array[i] != "number") {
@@ -113,6 +118,10 @@ equal.addEventListener("click", (e) => {
                 display.style.color = "red";
                 display.textContent = "Invalid entry";
             }
+        }
+        else if ( typeof array[array.length-1] != "number") {
+            display.style.color = "red";
+            display.textContent = "Invalid entry";
         }
     }
     

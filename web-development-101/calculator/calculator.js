@@ -29,9 +29,7 @@ function operate(operator, num1, num2) {
     else if (operator == "divide") {
         result = divide(num1,num2);
     }
-    else {
-        display.textContent = "Calcualtor error";
-    }
+    return result;
 }
 
 function reset() {

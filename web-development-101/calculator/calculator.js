@@ -109,6 +109,7 @@ function isValid (array) {
 // GET DOMS
 let operators = document.querySelectorAll(".operators");
 let nums = document.querySelectorAll(".nums");
+let decimal = document.querySelector("#decimal");
 let equal = document.querySelector("#equal");
 let clear = document.querySelector("#clear");
 let display = document.querySelector("#display");
@@ -145,6 +146,21 @@ for (let i = 0 ; i < operators.length ; i++ ) {
             text = "/";
         }
         update(display, text);
+
+        //Turn decimal point listener on
+        decimal.addEventListener("click", (e) => {
+            //turns off after clicking
+            //turns back on once operator is clicked
+            build.push(".");
+            text = ".";
+            update(display, text);
+        
+            //Turn it off after use
+            decimal.removeEventListener("click", (e) => {
+                build.push(".");
+                text = ".";
+                update(display, text);});
+        });
     });
 }
 
@@ -223,4 +239,19 @@ equal.addEventListener("click", (e) => {
 //Click listener for clearing the display and calculations
 clear.addEventListener("click", (e) => {
     reset();
+});
+
+//Click listener for "." sign
+decimal.addEventListener("click", (e) => {
+    //turns off after clicking
+    //turns back on once operator is clicked
+    build.push(".");
+    text = ".";
+    update(display, text);
+
+    //Turn it off after use
+    decimal.removeEventListener("click", (e) => {
+        build.push(".");
+        text = ".";
+        update(display, text);});
 });

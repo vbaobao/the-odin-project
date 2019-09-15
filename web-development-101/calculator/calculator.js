@@ -49,6 +49,7 @@ function update(display, text) {
 }
 
 function buildArray (build) {
+    //Rebuild array to join digits together
     let array = [];
     let num = [];
     for ( let i = 0; i < build.length; i++) {
@@ -68,6 +69,30 @@ function buildArray (build) {
         }
     }
     return array;
+}
+
+function isValid (array) {
+    //Check if calculation array entries are valid
+    //Returns true if array is in [num, string, num] format.
+    //Returns false otherwise, ex. ["add", 2, 3]
+    for (let i = 0; i < array.length; i++) {
+        if ( i == 0 || i%2 == 0 ) {
+            if ( typeof array[i] != "number") {
+                //If index is 0 or even numbers are not numbers
+                return false;
+            }
+        }
+        else if ( i%2 != 0 ) {
+            if ( typeof calcArray[i] != "string" ) {
+                //If index is odd and is not a string
+                return false;
+            }
+        }
+        else if ( typeof calcArray[calcArray.length-1] != "number") {
+            //If the last element of the array is not a number
+            return false;
+        }
+    }
 }
 
 // GET DOMS
@@ -128,75 +153,61 @@ equal.addEventListener("click", (e) => {
     let calcArray = buildArray(build);
 
     //Check if entries are valid
-    //["add", 2, 3] should be invalid
-    for (let i = 0; i < array.length; i++) {
-        if ( i == 0 || i%2 == 0 ) {
-            if ( typeof array[i] != "number") {
-                display.style.color = "red";
-                display.textContent = "Invalid entry";
-            }
-        }
-        else if ( i%2 != 0 ) {
-            if ( typeof array[i] != "string" ) {
-                display.style.color = "red";
-                display.textContent = "Invalid entry";
-            }
-        }
-        else if ( typeof array[array.length-1] != "number") {
-            display.style.color = "red";
-            display.textContent = "Invalid entry";
-        }
+    //If not valid show on the display
+    if (!isValid(calcArray)) {
+        display.style.color = "red";
+        display.textContent = "Invalid entry";
     }
     
     //Checks for order of operation MDAS, left->right
     //Insert result of operation into the array
     //Remove elements of the array after it is calculated
     let result = 0;
-    while (array.length > 1) {
-        for (let i = 0; i < array.length; i++) {
+    while (calcArray.length > 1) {
+        for (let i = 0; i < calcArray.length; i++) {
             //multiply
-            if (array[i] == "multiply") {
-                result = operate(array[i], array[i-1], array[i+1]);
-                array = array.splice(i, 0, result);
-                array = array.splice(i-1, 3);
+            if (calcArray[i] == "multiply") {
+                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                calcArray = calcArray.splice(i, 0, result);
+                calcArray = calcArray.splice(i-1, 3);
             }
         }
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < calcArray.length; i++) {
             //divide + divide by 0 check
-            if (array[i] == "divide") {
-                if ( array[i+1] == 0 ) {
+            if (calcArray[i] == "divide") {
+                if ( calcArray[i+1] == 0 ) {
                     display.textContent = "Divide by 0 Error";
-                    array = [];
+                    calcArray = [];
                 }
-                result = operate(array[i], array[i-1], array[i+1]);
-                array = array.splice(i, 0, result);
-                array = array.splice(i-1, 3);
+                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                calcArray = calcArray.splice(i, 0, result);
+                calcArray = calcArray.splice(i-1, 3);
             }
         }
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < calcArray.length; i++) {
             //add
-            if (array[i] == "add") {
-                result = operate(array[i], array[i-1], array[i+1]);
-                array = array.splice(i, 0, result);
-                array = array.splice(i-1, 3);
+            if (calcArray[i] == "add") {
+                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                calcArray = calcArray.splice(i, 0, result);
+                calcArray = calcArray.splice(i-1, 3);
             }
         }
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < calcArray.length; i++) {
             //subtract
-            if (array[i] == "subtract") {
-                result = operate(array[i], array[i-1], array[i+1]);
-                array = array.splice(i, 0, result);
-                array = array.splice(i-1, 3);
+            if (calcArray[i] == "subtract") {
+                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                calcArray = calcArray.splice(i, 0, result);
+                calcArray = calcArray.splice(i-1, 3);
             }
         }
     }
     //Rounding
-    array[0] = Math.round(array[0]*100000)/100000;
+    calcArray[0] = Math.round(calcArray[0]*100000)/100000;
 
 
     display.textContent = "";
-    console.log(array);
-    update(display, array[0]);
+    console.log(calcArray);
+    update(display, calcArray[0]);
 });
 
 //Click listener for clearing the display and calculations

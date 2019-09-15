@@ -40,6 +40,7 @@ function reset() {
     operator = "";
     display.textContent = "";
     display.style.color = "black";
+    displayResult.textContent = "";
     display.removeChild(displayResult);
 }
 
@@ -215,7 +216,7 @@ equal.addEventListener("click", (e) => {
 
 
         display.appendChild(displayResult);
-        update(display, calcArray[0]);
+        update(displayResult, calcArray[0]);
     }
 });
 

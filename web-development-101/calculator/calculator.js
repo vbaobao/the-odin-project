@@ -148,7 +148,7 @@ for (let i = 0 ; i < operators.length ; i++ ) {
         update(display, text);
 
         //Turn decimal point listener on
-        decimal.addEventListener("click", (e) => {
+        decimal.addEventListener("click", function addDeci(e) {
             //turns off after clicking
             //turns back on once operator is clicked
             build.push(".");
@@ -156,10 +156,7 @@ for (let i = 0 ; i < operators.length ; i++ ) {
             update(display, text);
         
             //Turn it off after use
-            decimal.removeEventListener("click", (e) => {
-                build.push(".");
-                text = ".";
-                update(display, text);});
+            e.currentTarget.removeEventListener(e.type, addDeci);
         });
     });
 }
@@ -242,7 +239,7 @@ clear.addEventListener("click", (e) => {
 });
 
 //Click listener for "." sign
-decimal.addEventListener("click", (e) => {
+decimal.addEventListener("click", function addDeci(e) {
     //turns off after clicking
     //turns back on once operator is clicked
     build.push(".");
@@ -250,8 +247,5 @@ decimal.addEventListener("click", (e) => {
     update(display, text);
 
     //Turn it off after use
-    decimal.removeEventListener("click", (e) => {
-        build.push(".");
-        text = ".";
-        update(display, text);});
+    e.currentTarget.removeEventListener(e.type, addDeci);
 });

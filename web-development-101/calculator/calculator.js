@@ -93,15 +93,34 @@ for (let i = 0 ; i < nums.length ; i++ ) {
     update(display, text);
 }
 
-//Clcik listener for "=" sign
+//Click listener for "=" sign
 equal.addEventListener("click", (e) => {
     //EVERYTHING HAPPENS HERE, AFTER EQUAL IS CLICKED
+    //Check numbers
     //Checks if entry is valid. In number/string alternations
     //Checks for order of operations
     //Check division by 0
     //Executes operations for the numbers before and after the op
-    let result = 0;
-    let array = build;
+
+    //Rebuild array to join digits together
+    let array = [];
+    let num = [];
+    for ( let i = 0; i < build.length; i++) {
+        if (typeof build[i] == "string") {
+            array.push(build[i]);
+        }
+        else if (typeof build[i] == "number" && typeof build[i+1] == "number") {
+            num.push(build[i]);
+        }
+        else if (typeof build[i] == "number" && typeof build[i+1] == "string") {
+            num.push(build[i]);
+            array.push(num.join(""));
+            num = [];
+        }
+        else {
+            console.log("Error");
+        }
+    }
 
     //Check if entries are valid
     //["add", 2, 3] should be invalid
@@ -127,6 +146,7 @@ equal.addEventListener("click", (e) => {
     //Checks for order of operation MDAS, left->right
     //Insert result of operation into the array
     //Remove elements of the array after it is calculated
+    let result = 0;
     while (array.length > 1) {
         for (let i = 0; i < array.length; i++) {
             //multiply
@@ -165,6 +185,10 @@ equal.addEventListener("click", (e) => {
             }
         }
     }
+    //Rounding
+    array[0] = Math.round(array[0]*100000)/100000;
+
+
     display.textContent = "";
     console.log(array);
     update(display, array[0]);

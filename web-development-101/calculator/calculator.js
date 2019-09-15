@@ -131,7 +131,6 @@ for (let i = 0 ; i < operators.length ; i++ ) {
             build.push("divide");
             text = "/";
         }
-
         update(display, text);
     });
 }

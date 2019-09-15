@@ -42,6 +42,16 @@ function reset() {
     display.style.color = "black";
     displayResult.textContent = "";
     display.removeChild(displayResult);
+    decimal.addEventListener("click", function addDeci(e) {
+        //turns off after clicking
+        //turns back on once operator is clicked
+        build.push(".");
+        text = ".";
+        update(display, text);
+    
+        //Turn it off after use
+        e.currentTarget.removeEventListener(e.type, addDeci);
+    });
 }
 
 function update(display, text) {
@@ -56,21 +66,27 @@ function buildArray (build) {
     let tempNum;
     for ( let i = 0; i < build.length; i++) {
         if (typeof build[i] == "string") {
-            array.push(build[i]);
+            if (build[i] == ".") {
+                num.push(build[i]);
+            }
+            else {
+                array.push(build[i]);
+            }
         }
         else if (typeof build[i] == "number") {
             if (i+1 == build.length) {
                 num.push(build[i]);
-                tempNum = parseInt(num.join(""), 10);
+                tempNum = parseFloat(num.join(""));
                 array.push(tempNum);
                 num = [];
             }
-            else if (typeof build[i+1] == "number") {
+            else if (typeof build[i+1] == "number" || build[i+1] == ".") {
                 num.push(build[i]);
             }
-            else if (typeof build[i+1] == "string") {
+            else if (typeof build[i+1] == "string" && build[i+1] != ".") {
                 num.push(build[i]);
-                tempNum = parseInt(num.join(""), 10);
+                tempNum = num.join("")
+                tempNum = parseFloat(num.join(""));
                 array.push(tempNum);
                 num = [];
             }

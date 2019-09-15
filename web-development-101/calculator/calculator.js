@@ -51,7 +51,6 @@ function buildArray (build) {
     let array = [];
     let num = [];
     let tempNum;
-    console.log("build from buildArray: " + build);
     for ( let i = 0; i < build.length; i++) {
         if (typeof build[i] == "string") {
             array.push(build[i]);
@@ -219,7 +218,6 @@ equal.addEventListener("click", (e) => {
 
 
     display.textContent = "";
-    console.log(calcArray);
     update(display, calcArray[0]);
 });
 

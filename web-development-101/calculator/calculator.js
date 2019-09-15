@@ -52,6 +52,7 @@ function buildArray (build) {
     //Rebuild array to join digits together
     let array = [];
     let num = [];
+    let tempNum;
     console.log("build from buildArray: " + build);
     for ( let i = 0; i < build.length; i++) {
         if (typeof build[i] == "string") {
@@ -60,7 +61,8 @@ function buildArray (build) {
         else if (typeof build[i] == "number") {
             if (i+1 == build.length) {
                 num.push(build[i]);
-                array.push(num.join(""));
+                tempNum = parseInt(num.join(""), 10);
+                array.push(tempNum);
                 num = [];
             }
             else if (typeof build[i+1] == "number") {
@@ -68,7 +70,8 @@ function buildArray (build) {
             }
             else if (typeof build[i+1] == "string") {
                 num.push(build[i]);
-                array.push(num.join(""));
+                tempNum = parseInt(num.join(""), 10);
+                array.push(tempNum);
                 num = [];
             }
         }
@@ -88,14 +91,17 @@ function isValid (array) {
             }
         }
         else if ( i%2 != 0 ) {
-            if ( typeof calcArray[i] != "string" ) {
+            if ( typeof array[i] != "string" ) {
                 //If index is odd and is not a string
                 return false;
             }
         }
-        else if ( typeof calcArray[calcArray.length-1] != "number") {
+        else if ( typeof array[array.length-1] != "number") {
             //If the last element of the array is not a number
             return false;
+        }
+        else {
+            return true;
         }
     }
 }

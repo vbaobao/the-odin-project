@@ -52,20 +52,25 @@ function buildArray (build) {
     //Rebuild array to join digits together
     let array = [];
     let num = [];
+    console.log("build from buildArray: " + build);
     for ( let i = 0; i < build.length; i++) {
         if (typeof build[i] == "string") {
             array.push(build[i]);
         }
-        else if (typeof build[i] == "number" && typeof build[i+1] == "number") {
-            num.push(build[i]);
-        }
-        else if (typeof build[i] == "number" && typeof build[i+1] == "string") {
-            num.push(build[i]);
-            array.push(num.join(""));
-            num = [];
-        }
-        else {
-            console.log("Error");
+        else if (typeof build[i] == "number") {
+            if (i+1 == build.length) {
+                num.push(build[i]);
+                array.push(num.join(""));
+                num = [];
+            }
+            else if (typeof build[i+1] == "number") {
+                num.push(build[i]);
+            }
+            else if (typeof build[i+1] == "string") {
+                num.push(build[i]);
+                array.push(num.join(""));
+                num = [];
+            }
         }
     }
     return array;

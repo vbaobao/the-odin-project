@@ -48,6 +48,28 @@ function update(display, text) {
     display.textContent = display.textContent + " " + text;
 }
 
+function buildArray (build) {
+    let array = [];
+    let num = [];
+    for ( let i = 0; i < build.length; i++) {
+        if (typeof build[i] == "string") {
+            array.push(build[i]);
+        }
+        else if (typeof build[i] == "number" && typeof build[i+1] == "number") {
+            num.push(build[i]);
+        }
+        else if (typeof build[i] == "number" && typeof build[i+1] == "string") {
+            num.push(build[i]);
+            array.push(num.join(""));
+            num = [];
+        }
+        else {
+            console.log("Error");
+        }
+    }
+    return array;
+}
+
 // GET DOMS
 let operators = document.querySelectorAll(".operators");
 let nums = document.querySelectorAll(".nums");
@@ -103,24 +125,7 @@ equal.addEventListener("click", (e) => {
     //Executes operations for the numbers before and after the op
 
     //Rebuild array to join digits together
-    let array = [];
-    let num = [];
-    for ( let i = 0; i < build.length; i++) {
-        if (typeof build[i] == "string") {
-            array.push(build[i]);
-        }
-        else if (typeof build[i] == "number" && typeof build[i+1] == "number") {
-            num.push(build[i]);
-        }
-        else if (typeof build[i] == "number" && typeof build[i+1] == "string") {
-            num.push(build[i]);
-            array.push(num.join(""));
-            num = [];
-        }
-        else {
-            console.log("Error");
-        }
-    }
+    let calcArray = buildArray(build);
 
     //Check if entries are valid
     //["add", 2, 3] should be invalid

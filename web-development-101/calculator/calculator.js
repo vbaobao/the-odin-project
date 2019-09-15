@@ -181,7 +181,7 @@ equal.addEventListener("click", (e) => {
             //multiply
             if (calcArray[i] == "multiply") {
                 result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i, 0, result);
+                calcArray.splice(i+2, 0, result);
                 calcArray.splice(i-1, 3);
             }
         }
@@ -193,7 +193,7 @@ equal.addEventListener("click", (e) => {
                     calcArray = [];
                 }
                 result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i, 0, result);
+                calcArray.splice(i+2, 0, result);
                 calcArray.splice(i-1, 3);
             }
         }
@@ -201,7 +201,7 @@ equal.addEventListener("click", (e) => {
             //add
             if (calcArray[i] == "add") {
                 result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i, 0, result);
+                calcArray.splice(i+2, 0, result);
                 calcArray.splice(i-1, 3);
             }
         }
@@ -209,7 +209,7 @@ equal.addEventListener("click", (e) => {
             //subtract
             if (calcArray[i] == "subtract") {
                 result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i, 0, result);
+                calcArray.splice(i+2, 0, result);
                 calcArray.splice(i-1, 3);
             }
         }

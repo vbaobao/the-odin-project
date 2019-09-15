@@ -39,6 +39,7 @@ function reset() {
     text = "";
     operator = "";
     display.textContent = "";
+    display.style.color = "black";
 }
 
 function update(display, text) {
@@ -154,71 +155,65 @@ for (let i = 0 ; i < nums.length ; i++ ) {
 
 //Click listener for "=" sign
 equal.addEventListener("click", (e) => {
-    //EVERYTHING HAPPENS HERE, AFTER EQUAL IS CLICKED
-    //Check numbers
-    //Checks if entry is valid. In number/string alternations
-    //Checks for order of operations
-    //Check division by 0
-    //Executes operations for the numbers before and after the op
-
-    //Rebuild array to join digits together
+    //Concatenates digits into numbers and rebuilds array
     let calcArray = buildArray(build);
 
-    //Check if entries are valid
-    //If not valid show on the display
-    if (!isValid(calcArray)) {
+    //Checks if the array is valid [num, operator,num] pattern
+    let valid = isValid(calcArray);
+    if (valid == false) {
         display.style.color = "red";
         display.textContent = "Invalid entry";
     }
-    
-    //Checks for order of operation MDAS, left->right
-    //Insert result of operation into the array
-    //Remove elements of the array after it is calculated
-    let result = 0;
-    while (calcArray.length > 1) {
-        for (let i = 0; i < calcArray.length; i++) {
-            //multiply
-            if (calcArray[i] == "multiply") {
-                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i+2, 0, result);
-                calcArray.splice(i-1, 3);
-            }
-        }
-        for (let i = 0; i < calcArray.length; i++) {
-            //divide + divide by 0 check
-            if (calcArray[i] == "divide") {
-                if ( calcArray[i+1] == 0 ) {
-                    display.textContent = "Divide by 0 Error";
-                    calcArray = [];
+    else {
+        //Checks for order of operation MDAS, left->right
+        //Insert result of operation into the array
+        //Remove elements of the array after it is calculated
+        let result = 0;
+        while (calcArray.length > 1) {
+            for (let i = 0; i < calcArray.length; i++) {
+                //multiply
+                if (calcArray[i] == "multiply") {
+                    result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                    calcArray.splice(i+2, 0, result);
+                    calcArray.splice(i-1, 3);
                 }
-                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i+2, 0, result);
-                calcArray.splice(i-1, 3);
+            }
+            for (let i = 0; i < calcArray.length; i++) {
+                //divide + divide by 0 check
+                if (calcArray[i] == "divide") {
+                    if ( calcArray[i+1] == 0 ) {
+                        display.textContent = "Divide by 0 Error";
+                        calcArray = [];
+                    }
+                    result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                    calcArray.splice(i+2, 0, result);
+                    calcArray.splice(i-1, 3);
+                }
+            }
+            for (let i = 0; i < calcArray.length; i++) {
+                //add
+                if (calcArray[i] == "add") {
+                    result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                    calcArray.splice(i+2, 0, result);
+                    calcArray.splice(i-1, 3);
+                }
+            }
+            for (let i = 0; i < calcArray.length; i++) {
+                //subtract
+                if (calcArray[i] == "subtract") {
+                    result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
+                    calcArray.splice(i+2, 0, result);
+                    calcArray.splice(i-1, 3);
+                }
             }
         }
-        for (let i = 0; i < calcArray.length; i++) {
-            //add
-            if (calcArray[i] == "add") {
-                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i+2, 0, result);
-                calcArray.splice(i-1, 3);
-            }
-        }
-        for (let i = 0; i < calcArray.length; i++) {
-            //subtract
-            if (calcArray[i] == "subtract") {
-                result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
-                calcArray.splice(i+2, 0, result);
-                calcArray.splice(i-1, 3);
-            }
-        }
+        //Rounding
+        calcArray[0] = Math.round(calcArray[0]*100000)/100000;
+
+
+        display.textContent = "";
+        update(display, calcArray[0]);
     }
-    //Rounding
-    calcArray[0] = Math.round(calcArray[0]*100000)/100000;
-
-
-    display.textContent = "";
-    update(display, calcArray[0]);
 });
 
 //Click listener for clearing the display and calculations

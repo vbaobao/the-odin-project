@@ -40,6 +40,7 @@ function reset() {
     operator = "";
     display.textContent = "";
     display.style.color = "black";
+    display.removeChild(displayResult);
 }
 
 function update(display, text) {
@@ -110,6 +111,8 @@ let nums = document.querySelectorAll(".nums");
 let equal = document.querySelector("#equal");
 let clear = document.querySelector("#clear");
 let display = document.querySelector("#display");
+let displayResult = document.createElement("div");
+displayResult.setAttribute("id", "result");
 
 // VARIABLES
 let operator = "";
@@ -211,7 +214,7 @@ equal.addEventListener("click", (e) => {
         calcArray[0] = Math.round(calcArray[0]*100000)/100000;
 
 
-        display.textContent = "";
+        display.appendChild(displayResult);
         update(display, calcArray[0]);
     }
 });

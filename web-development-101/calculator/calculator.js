@@ -114,30 +114,35 @@ for (let i = 0 ; i < operators.length ; i++ ) {
         if (i == 0) { 
             operator = "add";
             build.push("add");
-            text = "+"; }
+            text = "+";
+        }
         else if (i == 1) {
             operator = "substract";
             build.push("subtract");
-            text = "-"; }
+            text = "-";
+        }
         else if (i == 2) {
             operator = "multiply";
             build.push("multiply");
-            text = "*"; }
+            text = "*";
+        }
         else if (i == 3) {
             operator = "divide";
             build.push("divide");
-            text = "/";  }
-    });
+            text = "/";
+        }
 
-    update(display, text);
+        update(display, text);
+    });
 }
 
 //Click listeners for numbers
 for (let i = 0 ; i < nums.length ; i++ ) {
     nums[i].addEventListener("click", (e) => {
         build.push(i);
+        text = i;
+        update(display, text);
     });
-    update(display, text);
 }
 
 //Click listener for "=" sign

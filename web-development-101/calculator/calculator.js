@@ -69,8 +69,17 @@ function reset() {
     });
 }
 
-function backspace(array) {
-    array.pop();
+function backspace(display, array) {
+    //NOTE: need to add a check to convert "add" to "+" and so on
+    let text = array.pop();
+    console.log("text: " + text);
+    let regex = new RegExp("\\s" + text);
+    console.log("regex: " + regex);
+    let string = display.textContent;
+    console.log("string: " + string);
+    string = string.replace(regex, "");
+    console.log("string removed: " + string);
+    display.textContent = string;
 }
 
 function update(display, text) {
@@ -213,7 +222,7 @@ for (let i = 0 ; i < nums.length ; i++ ) {
 
 //Click listener for backspace
 del.addEventListener("click", (e) => {
-    backspace(build);
+    backspace(display, build);
 });
 
 //Click listener for "=" sign

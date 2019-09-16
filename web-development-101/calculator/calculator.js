@@ -151,6 +151,7 @@ let nums = document.querySelectorAll(".nums");
 let decimal = document.querySelector("#decimal");
 let equal = document.querySelector("#equal");
 let clear = document.querySelector("#clear");
+let del = document.querySelector("#del");
 let display = document.querySelector("#display");
 let displayResult = document.createElement("div");
 displayResult.setAttribute("id", "result");
@@ -209,6 +210,11 @@ for (let i = 0 ; i < nums.length ; i++ ) {
         update(display, text);
     });
 }
+
+//Click listener for backspace
+del.addEventListener("click", (e) => {
+    backspace(build);
+});
 
 //Click listener for "=" sign
 equal.addEventListener("click", (e) => {

@@ -63,13 +63,14 @@ function reset() {
     decimal.addEventListener("click", function addDeci(e) {
         //turns off after clicking
         //turns back on once operator is clicked
+        decimal.removeAttribute("class");
         build.push(".");
         text = ".";
         update(display, text);
     
         //Turn it off after use
         e.currentTarget.removeEventListener(e.type, addDeci);
-        decimal.style.cssText = "background: #babab4; color: #999999;";
+        decimal.setAttribute("class", "off");
     });
 }
 
@@ -106,6 +107,19 @@ function backspace(display, array) {
         let regex = new RegExp("\\s[.]$");
         string = string.replace(regex, "");
         display.textContent = string;
+
+        decimal.addEventListener("click", function addDeci(e) {
+            //turns off after clicking
+            //turns back on once operator is clicked
+            decimal.removeAttribute("class");
+            build.push(".");
+            text = ".";
+            update(display, text);
+        
+            //Turn it off after use
+            e.currentTarget.removeEventListener(e.type, addDeci);
+            decimal.setAttribute("class", "off");
+        });
     }
 }
 
@@ -227,13 +241,14 @@ for (let i = 0 ; i < operators.length ; i++ ) {
         decimal.addEventListener("click", function addDeci(e) {
             //turns off after clicking
             //turns back on once operator is clicked
+            decimal.removeAttribute("class");
             build.push(".");
             text = ".";
             update(display, text);
         
             //Turn it off after use
             e.currentTarget.removeEventListener(e.type, addDeci);
-            decimal.style.cssText = "background: #babab4; color: #999999;";
+            decimal.setAttribute("class", "off");
         });
     });
 }
@@ -320,11 +335,12 @@ clear.addEventListener("click", (e) => {
 decimal.addEventListener("click", function addDeci(e) {
     //turns off after clicking
     //turns back on once operator is clicked
+    decimal.removeAttribute("class");
     build.push(".");
     text = ".";
     update(display, text);
 
     //Turn it off after use
     e.currentTarget.removeEventListener(e.type, addDeci);
-    decimal.style.cssText = "background: #babab4; color: #999999;";
+    decimal.setAttribute("class", "off");
 });

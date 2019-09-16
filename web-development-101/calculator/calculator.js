@@ -100,21 +100,25 @@ function isValid (array) {
     //Returns true if array is in [num, string, num] format.
     //Returns false otherwise, ex. ["add", 2, 3]
     for (let i = 0; i < array.length; i++) {
-        if ( i == 0 || i%2 == 0 ) {
-            if ( typeof array[i] != "number") {
-                //If index is 0 or even numbers are not numbers
-                return false;
-            }
+        if ( typeof array[array.length-1] != "number") {
+            //If the last element of the array is not a number
+            return false;
         }
         else if ( i%2 != 0 ) {
             if ( typeof array[i] != "string" ) {
                 //If index is odd and is not a string
                 return false;
             }
+            else if (array[i] == "divide" && array[i+1] == 0) {
+                //if divide by 0
+                return false;
+            }
         }
-        else if ( typeof array[array.length-1] != "number") {
-            //If the last element of the array is not a number
-            return false;
+        else if ( i == 0 || i%2 == 0 ) {
+            if ( typeof array[i] != "number") {
+                //If index is 0 or even numbers are not numbers
+                return false;
+            }
         }
         else {
             return true;
@@ -214,10 +218,6 @@ equal.addEventListener("click", (e) => {
             for (let i = 0; i < calcArray.length; i++) {
                 //divide + divide by 0 check
                 if (calcArray[i] == "divide") {
-                    if ( calcArray[i+1] == 0 ) {
-                        display.textContent = "Divide by 0 Error";
-                        calcArray = [];
-                    }
                     result = operate(calcArray[i], calcArray[i-1], calcArray[i+1]);
                     calcArray.splice(i+2, 0, result);
                     calcArray.splice(i-1, 3);
@@ -264,4 +264,5 @@ decimal.addEventListener("click", function addDeci(e) {
 
     //Turn it off after use
     e.currentTarget.removeEventListener(e.type, addDeci);
+    decimal.style.cssText = "background: gray; color: gray;";
 });

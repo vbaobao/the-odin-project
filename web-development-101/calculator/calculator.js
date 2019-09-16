@@ -1,3 +1,7 @@
+//TO DO:
+//When delete decimal, turn the event listener back on
+//When decimal turns back on change the colors back
+
 //COLORS REFERENCE
 const GREEN = "#d5eecc";
 const GREENDARK = "#7dae94";
@@ -72,14 +76,37 @@ function reset() {
 function backspace(display, array) {
     //NOTE: need to add a check to convert "add" to "+" and so on
     let text = array.pop();
-    console.log("text: " + text);
-    let regex = new RegExp("\\s" + text);
-    console.log("regex: " + regex);
     let string = display.textContent;
-    console.log("string: " + string);
-    string = string.replace(regex, "");
-    console.log("string removed: " + string);
-    display.textContent = string;
+    if (typeof text == "number") {
+        let regex = new RegExp("\\s" + text + "$");
+        string = string.replace(regex, "");
+        display.textContent = string;
+    }
+    else if (text == "add") {
+        let regex = new RegExp("\\s[+]$");
+        string = string.replace(regex, "");
+        display.textContent = string;
+    }
+    else if (text == "subtract") {
+        let regex = new RegExp("\\s[-]$");
+        string = string.replace(regex, "");
+        display.textContent = string;
+    }
+    else if (text == "multiply") {
+        let regex = new RegExp("\\s[*]$");
+        string = string.replace(regex, "");
+        display.textContent = string;
+    }
+    else if (text == "divide") {
+        let regex = new RegExp("\\s[/]$");
+        string = string.replace(regex, "");
+        display.textContent = string;
+    }
+    else if (text == ".") {
+        let regex = new RegExp("\\s[.]$");
+        string = string.replace(regex, "");
+        display.textContent = string;
+    }
 }
 
 function update(display, text) {

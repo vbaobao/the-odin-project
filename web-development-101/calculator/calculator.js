@@ -69,6 +69,10 @@ function reset() {
     });
 }
 
+function backspace(array) {
+    array.pop();
+}
+
 function update(display, text) {
     //Displays text updates as buttons are pressed
     display.textContent = display.textContent + " " + text;

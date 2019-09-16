@@ -65,6 +65,7 @@ function reset() {
     
         //Turn it off after use
         e.currentTarget.removeEventListener(e.type, addDeci);
+        decimal.style.cssText = "background: #babab4; color: #999999;";
     });
 }
 
@@ -191,6 +192,7 @@ for (let i = 0 ; i < operators.length ; i++ ) {
         
             //Turn it off after use
             e.currentTarget.removeEventListener(e.type, addDeci);
+            decimal.style.cssText = "background: #babab4; color: #999999;";
         });
     });
 }

@@ -1,3 +1,17 @@
+//COLORS REFERENCE
+const GREEN = "#d5eecc";
+const GREENDARK = "#7dae94";
+const RED = "#e9806e";
+const REDDARK = "#bc5a4c";
+const YELLOW = "#f5cd58";
+const YELLOWDARK = "#da8a33";
+const BLUE = "#b0e0e6";
+const BLUEDARK = "#496991";
+const GRAY = "#babab4";
+const GRAYDARK = "#999999";
+const GRAYDARKER = "#6b6b6b";
+const FONTCOLOR = "#2d2d2d";
+
 // FUNCTIONS
 function add(num1, num2) {
     return num1 + num2;
@@ -264,5 +278,5 @@ decimal.addEventListener("click", function addDeci(e) {
 
     //Turn it off after use
     e.currentTarget.removeEventListener(e.type, addDeci);
-    decimal.style.cssText = "background: gray; color: gray;";
+    decimal.style.cssText = "background: #babab4; color: #999999;";
 });

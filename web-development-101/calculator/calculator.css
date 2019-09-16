@@ -74,6 +74,11 @@ body {
   #decimal {
     background: #999999;
   }
+
+  .off {
+    background: #babab4;
+    color: #999999;
+  }
   
   #decimal:hover {
     background: #6b6b6b;

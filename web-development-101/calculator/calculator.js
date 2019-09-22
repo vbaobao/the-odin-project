@@ -44,7 +44,7 @@ function reset() {
     display.textContent = "";
     display.style.color = "black";
     displayResult.textContent = "";
-    display.removeChild(displayResult);
+    container.removeChild(displayResult);
 
     decimal.classList.remove("off");
     decimal.addEventListener("click", function addDeci(e) {
@@ -189,9 +189,9 @@ let equal = document.getElementById("equal");
 let clear = document.getElementById("clear");
 let del = document.getElementById("del");
 let display = document.getElementById("display");
+let container = document.getElementById("container");
 let displayResult = document.createElement("div");
-displayResult.setAttribute("id", "result");
-display.appendChild(displayResult);
+displayResult.id = "result";
 
 // VARIABLES
 let operator = "";
@@ -307,6 +307,7 @@ equal.addEventListener("click", (e) => {
         //Rounding
         calcArray[0] = Math.round(calcArray[0]*100000)/100000;
 
+         container.prepend(displayResult);
         update(displayResult, calcArray[0]);
     }
 });

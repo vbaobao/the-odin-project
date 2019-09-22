@@ -1,7 +1,7 @@
 body {
     display: flex;
     justify-content: center;
-    margin: 50px;
+    margin: 10% 20%;
   }
 
   h1 {
@@ -17,9 +17,10 @@ body {
     justify-content: center;
     
     width: 350px;
-    border: 2px solid #babab4;
+    border: 1px solid #babab4;
     border-radius: 20px;
-    padding: 20px;
+    padding: 5%;
+    margin: auto;
     
     background: white;
     filter: drop-shadow(4px 4px 2px #babab4);
@@ -103,4 +104,10 @@ body {
   
   #clear:hover {
     background: #496991;
+  }
+
+  #del {
+    background: #ffffff;
+    width: 100%;
+    filter: drop-shadow(0px 2px 1px #babab4);
   }

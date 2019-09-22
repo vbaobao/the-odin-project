@@ -1,20 +1,5 @@
 //TO DO:
-//When delete decimal, turn the event listener back on
-//When decimal turns back on change the colors back
-
-//COLORS REFERENCE
-const GREEN = "#d5eecc";
-const GREENDARK = "#7dae94";
-const RED = "#e9806e";
-const REDDARK = "#bc5a4c";
-const YELLOW = "#f5cd58";
-const YELLOWDARK = "#da8a33";
-const BLUE = "#b0e0e6";
-const BLUEDARK = "#496991";
-const GRAY = "#babab4";
-const GRAYDARK = "#999999";
-const GRAYDARKER = "#6b6b6b";
-const FONTCOLOR = "#2d2d2d";
+//Off is not applying style for some reason
 
 // FUNCTIONS
 function add(num1, num2) {
@@ -60,10 +45,11 @@ function reset() {
     display.style.color = "black";
     displayResult.textContent = "";
     display.removeChild(displayResult);
+
+    decimal.classList.remove("off");
     decimal.addEventListener("click", function addDeci(e) {
         //turns off after clicking
         //turns back on once operator is clicked
-        decimal.removeAttribute("class");
         build.push(".");
         text = ".";
         update(display, text);
@@ -108,10 +94,10 @@ function backspace(display, array) {
         string = string.replace(regex, "");
         display.textContent = string;
 
+        decimal.classList.remove("off");
         decimal.addEventListener("click", function addDeci(e) {
             //turns off after clicking
             //turns back on once operator is clicked
-            decimal.removeAttribute("class");
             build.push(".");
             text = ".";
             update(display, text);
@@ -198,13 +184,14 @@ function isValid (array) {
 // GET DOMS
 let operators = document.querySelectorAll(".operators");
 let nums = document.querySelectorAll(".nums");
-let decimal = document.querySelector("#decimal");
-let equal = document.querySelector("#equal");
-let clear = document.querySelector("#clear");
-let del = document.querySelector("#del");
-let display = document.querySelector("#display");
+let decimal = document.getElementById("decimal");
+let equal = document.getElementById("equal");
+let clear = document.getElementById("clear");
+let del = document.getElementById("del");
+let display = document.getElementById("display");
 let displayResult = document.createElement("div");
 displayResult.setAttribute("id", "result");
+display.appendChild(displayResult);
 
 // VARIABLES
 let operator = "";
@@ -238,10 +225,10 @@ for (let i = 0 ; i < operators.length ; i++ ) {
         update(display, text);
 
         //Turn decimal point listener on
+        decimal.classList.remove("off");
         decimal.addEventListener("click", function addDeci(e) {
             //turns off after clicking
             //turns back on once operator is clicked
-            decimal.removeAttribute("class");
             build.push(".");
             text = ".";
             update(display, text);
@@ -320,8 +307,6 @@ equal.addEventListener("click", (e) => {
         //Rounding
         calcArray[0] = Math.round(calcArray[0]*100000)/100000;
 
-
-        display.appendChild(displayResult);
         update(displayResult, calcArray[0]);
     }
 });
@@ -335,7 +320,6 @@ clear.addEventListener("click", (e) => {
 decimal.addEventListener("click", function addDeci(e) {
     //turns off after clicking
     //turns back on once operator is clicked
-    decimal.removeAttribute("class");
     build.push(".");
     text = ".";
     update(display, text);

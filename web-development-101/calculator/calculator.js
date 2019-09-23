@@ -1,5 +1,6 @@
 //TO DO:
-//Off is not applying style for some reason
+//Delete does not turn on the decimal.
+//Delete prints multiple "."
 
 // FUNCTIONS
 function add(num1, num2) {
